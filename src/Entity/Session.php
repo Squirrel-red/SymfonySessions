@@ -60,6 +60,13 @@ class Session
         return $this->startDate;
     }
 
+    // on créé cette methode manuellement pour formater startDate (templates/entreprise/show.html.twig)
+    public function getStartDateFr(): ?string
+    {
+            return $this->startDate->format("d-m-Y");
+    }
+    //
+
     public function setStartDate(\DateTimeInterface $startDate): static
     {
         $this->startDate = $startDate;
@@ -83,6 +90,13 @@ class Session
     {
         return $this->endDate;
     }
+
+    // on créé cette methode manuellement pour formater endDate (templates/entreprise/show.html.twig)
+    public function getEndDateFr(): ?string
+    {
+        return $this->endDate->format("d-m-Y");
+    }
+        //
 
     public function setEndDate(\DateTimeInterface $endDate): static
     {
@@ -168,4 +182,15 @@ class Session
 
         return $this;
     }
+
+    // // On ajoute cette fonction pour faires les affichage répététifs
+    // public function __toString()
+    // {
+    //     return $this->name;
+    // }
+
+    public function __toString()
+    {
+        return $this->name." (".$this->startDate." ".$this->endDate." ".$this->nbPlaceTotal.")";
+    }    
 }

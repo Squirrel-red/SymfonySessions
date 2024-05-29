@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste desc sessions{% endblock %}
+
+{% block body %}
+
+<h1>Liste des sessions</h1>
+
+{% for session in sessions %}
+         {# pour afficher tous les sessions #}
+            {{ session }} <br>
+
+        {# pour afficher les sessions triés sur l'entreprise ou" ils travaillent  dans les ( ...)  #}
+        {# {{ employe }} ({{ employe.entreprise.raisonSociale }}) </br> #}
+
+        {# pour détailler lla liste on ajoute le lien #}
+        {# <a href="{{ path('show_employe', {'id': employe.id}) }}">{{ employe }}</a> ({{ employe.entreprise.raisonSociale }}) </br> #}
+{% endfor %}
+
+{% endblock %}

@@ -75,4 +75,12 @@ class Category
 
         return $this;
     }
+
+
+        // On ajoute cette fonction pour faires les affichage répététifs
+    public function __toString()
+    {
+        return $this->name;
+    }
+    //
 }
