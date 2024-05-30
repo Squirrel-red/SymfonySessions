@@ -10,9 +10,9 @@
     <h2>{{ student }}</h2>
     <p>
         {# Cas ManyToMany - un étudient peut avoir plusieurs sessions --> faire la boucle? #}
-        Session(s):<a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br> > 
+        {# Session(s):<a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br> > 
         Ajouter une session: <a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br>
-        Supprimer une session: <a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br>
+        Supprimer une session: <a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br> #}
         Nom: {{ student.lastName }}  <br>
         Prénom: {{ student.firstName }}  <br>
         Sexe: {{ student.sexe }}  <br>

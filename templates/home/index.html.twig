@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+
+{% block body %}
+{# on dégage les balises de styles et div et on ajoute le title h1  etc #}
+      <h1> Welcome {{ app.user.firstName}} </h1>
+      <p> {{ app.user.email}} </p>
+
+{% endblock %}

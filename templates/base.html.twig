@@ -28,9 +28,26 @@
                 <li><a href="{{path('app_user')}}">Liste des utilisateurs</a></li>
             </ul>
         </nav>
+
+        {# on ajoute la condition d'affichage Se connecter/Se déconnecter #}
+        {% if app.user %}
+ 
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                <a href="">Mon profil</a>
+
+        {% else %}
+                <a href="{{ path('app_login') }}">Se connecter</a>
+                <a href="{{ path('app_register') }}">S'enregistrer</a>        
+        {% endif %}
+  
+        {% if is_granted('ROLE_ADMIN') %}
+                <a href="">Panneau d'administration</a>
+        {% endif %}
+
         {#  on ajoute le container #}
         <main class="container">
-            {% block body %}{% endblock %}
+            {% block body %}
+            {% endblock %}   
         </main>
 
         {% block javascripts %}
