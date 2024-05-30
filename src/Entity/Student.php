@@ -70,6 +70,13 @@ class Student
         return $this->birthday;
     }
 
+    // on créé cette methode manuellement pour formater startDate (templates/student/show.html.twig)
+    public function getBirthdayFr(): ?string
+    {
+        return $this->birthday->format("d-m-Y");
+    }
+     //
+
     public function setBirthday(\DateTimeInterface $birthday): static
     {
         $this->birthday = $birthday;
@@ -163,4 +170,20 @@ class Student
 
         return $this;
     }
+
+        // // On ajoute cette fonction pour faires les affichage répététifs
+       // On ajoute cette fonction pour faires les affichage répététifs
+       public function __toString()
+       {
+           return $this->lastName." ".$this->firstName;
+       }
+
+       // On ajoute cette fonction pour faires les affichage répététifs
+       // et afficher les employés attachés à l'entreprise selon la raison sociale
+       // public function __toString()
+       // {
+       //     return $this->prenom." ".$this->nom." ".$this->getEntreprise()->getRaisonSociale();
+       // }
+
+
 }

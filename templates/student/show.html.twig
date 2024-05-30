@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un(e) étudint(e){% endblock %}
+
+{% block body %}
+    <h1>Détail d'un(e) étudient(e)</h1>
+
+    {# pour récupérer les noms de des sessions  qui est dans le toString  du fichier Student.php}
+    {# et on récupère le nom  #}
+    <h2>{{ student }}</h2>
+    <p>
+        {# Cas ManyToMany - un étudient peut avoir plusieurs sessions --> faire la boucle? #}
+        Session(s):<a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br> > 
+        Ajouter une session: <a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br>
+        Supprimer une session: <a href="{{ path('show_session', {'id':student.session.id})}}">{{ student.sessions }}</a> <br>
+        Nom: {{ student.lastName }}  <br>
+        Prénom: {{ student.firstName }}  <br>
+        Sexe: {{ student.sexe }}  <br>
+        Date d'e naissance' : {{ student.birthday | date("d.m.Y") }} <br> 
+        Email : {{ student.email }} <br>
+        Tél. : {{ student.phoneNumber }}  <br>  
+        Ville : {{ student.city }}  <br> 
+    </p>
+
+{% endblock %}
+

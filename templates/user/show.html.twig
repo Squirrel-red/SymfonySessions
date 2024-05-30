@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'un utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Détail d'un utilisateur</h1>
+
+    {# pour récupérer les noms&prénoms de des utilisateurs qui est dans le toString  du fichier User.php}
+    {# et on récupère les noms&prénoms  #}
+
+
+    <p>
+      
+        Nom: {{ user.lastName }}  <br>
+        Prénom: {{ user.firstName }}  <br>
+        Avatar : {{ user.avatar  }} <br> 
+
+    </p>
+
+
+
+{% endblock %}

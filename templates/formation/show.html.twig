@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une formation{% endblock %}
+
+{% block body %}
+    <h1>Détail d'une formation</h1>
+
+    {# pour récupérer le nom de la formation  qui est dans le toString  du fichier Formation.php}
+    {# et on récupère le id  #}
+    <h2>{{ formation }}</h2>
+       <p> 
+         Identifiant de la formation  : <b>{{  formation.id }}</b> 
+       </p>
+       <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio delectus minima sit, ab quas officia odit eius autem esse rerum quidem velit incidunt iure atque mollitia? Tenetur nesciunt dolores minima.
+       </p>
+
+{% endblock %}

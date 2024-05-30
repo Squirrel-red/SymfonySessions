@@ -167,4 +167,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    // On ajoute cette fonction pour faires les affichage répététifs
+       public function __toString()
+       {
+           return $this->lastName." ".$this->firstName;
+       }
 }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'unmodule{% endblock %}
+
+{% block body %}
+    <h1>Détail d'un module</h1>
+
+    {# pour récupérer le nom du module  qui est dans le toString  du fichier Module.php}
+    {# et on récupère le nom  #}
+    <h2>{{ module }}</h2>
+    <p>
+        Catégory : <a href="{{ path('show_category', {'id':module.category.id})}}">{{ module.category }}</a> <br>
+        Nom du module : {{ module.name }}  <br>
+    </p>
+
+{% endblock %}

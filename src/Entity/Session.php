@@ -184,13 +184,13 @@ class Session
     }
 
     // // On ajoute cette fonction pour faires les affichage répététifs
-    // public function __toString()
-    // {
-    //     return $this->name;
-    // }
-
     public function __toString()
     {
-        return $this->name." (".$this->startDate." ".$this->endDate." ".$this->nbPlaceTotal.")";
-    }    
+        return $this->name;
+    }
+
+    // public function __toString()
+    // {
+    //     return $this->name." (".$this->startDate." ".$this->endDate." ".$this->nbPlaceTotal.")";
+    // }    
 }
