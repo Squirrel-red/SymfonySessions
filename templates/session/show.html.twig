@@ -2,19 +2,224 @@
 
 {% block title %}Détail d'une session{% endblock %}
 
-{% block body %}
-    <h1>Détail d'une session</h1>
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/modal.css')}}">
+<link rel="stylesheet" href="{{asset('css/session.css')}}">
+<link rel="stylesheet" href="{{asset('css/table.css')}}">
+{% endblock %}
 
-    {# pour récupérer le nom de la session  qui est dans le toString  du fichier Session.php}
-    {# et on récupère le nom  #}
-    <h2>{{ session }}</h2>
-    <p>
+{% block body %}
+    <h1>Détail de la  session  "{{ session }}"</h1>
+
+    <button class="modifyButton">Modifier les infos</button>
+
+
+    {# <h2>{{ session }}</h2> #}
+    {# <p>
         Formation: <a href="{{ path('show_formation', {'id':session.formation.id})}}">{{ session.formation }}</a> <br>
         Nom de la session : {{ session.name }}  <br>
-        Date de naissance : {{ session.startDate | date("d.m.Y") }} <br>
-        Date d'embauche' : {{ session.endDate | date("d.m.Y") }} <br> 
+        Date de début : {{ session.startDate | date("d.m.Y") }} <br>
+        Date de fin' : {{ session.endDate | date("d.m.Y") }} <br> 
         Nombre de places : {{ session.nbPlaceTotal }}  <br> 
+        Etudient(s) inscrit(s) : {% for student in session.students %}
+        {{ student }} <br> #}
+        {# <a href="{{ path('show_student', {'id':session.students})}}">{{ student }}</a> #}
+        {# {% endfor %} #}
+        {# Etudient(s) : <a href="{{ path('show_student', {'id':session.student.id})}}">{{ session.student }}</a> <br> #}
+        {#  Méthodes dans App/Entity/Session.php  : getStudents() ; addStudent(Student $student) ; removeStudent(Student $student) #}
     </p>
 
-{% endblock %}
+{# {% endblock %} #}
+    {# pour récupérer le nom de la session  qui est dans le toString  du fichier Session.php}
+    {# et on récupère le nom  #}
+<div id="session-content">
+    <section id="session-infos">
+      <p><b>Nom de la session : </b><span>{{ session.name }}</span>
+      </p>
+      <p>
+        <b>Formation : </b><a href="{{ path('show_formation', {'id': session.formation.id}) }}">{{session.formation.name}}</a>
+      </p>
+      
+      <p><b>Date de début : </b><span>{{session.startDate | date("d/m/Y")}}</span>
+      </p>
+      <p><b>Date de fin : </b><span>{{session.endDate | date("d/m/Y")}}</span>
+      </p>
+    </section>
+  
+    <hr>
+  
+    <section id="session-modules">
+      <h3>Liste des modules :</h3>
+  
+      <div id="session-wrapper">
+  
+        {# modules dans la session #}
+        <table id="modulesTable">
+          <thead>
+            <tr>
+              <th>Modules intégrés</th>
+              <th>Durée</th>
+              <th><i class="fa-solid fa-circle-xmark"></i></th>
+            </tr>
+          </thead>
+  
+          <tbody>
+  
+            {% if session.programmes is empty %}
+            <tr>
+              <td colspan="3">
+                Aucun module
+              </td>
+            </tr>
+            {% else %}
+  
+            {% for programme in session.programmes %}
+            <tr>
+              <th>
+                {{programme.module.name}}
+              </th>
+  
+              <td class="progDuree">
+                <span class="showDuree">{{programme.duration}} j. <i class="fa-solid fa-pen-to-square editButton"></i></span>
+  
+                {# <form class="moduleForm" method="post"
+                  action="{{ path('session_update_programme', {'idSession': session.id, 'idProgramme' : prog.id}) }}">
+   #}
+                  {# <label for=" duree">Durée : </label>
+                  <input type="number" min="0" name="duree" id="duree_prog{{ programme.id }}"> #}
+  
+                  {# <input type="submit" value="valider"> #}
+                {# </form> #}
+              </td>
+          
+  
+              <td>
+                {# <a href="{{ path('remove_session_programme',{'idSession': session.id, 'idProgramme': programme.id}) }}"> #}
+                  {# <i class="fa-solid fa-circle-xmark delete"></i>
+                </a> #}
+              </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+  
+          </tbody>
+        </table>
+  
+   
+    </section>
+  
+    <hr>
+  
+    <section id="session-stagiaires">
+  
+      <h3>Liste des étudiants :</h3>
+  
+      <div id="session-places">
+        <p><b>Places totales : </b><span>{{session.nbPlaceTotal}}</span></p>
+        <p><b>Participants : </b><span>{{session.students | length}}</span></p>
+        <p><b>Places libres : </b><span>{{session.nbPlaceTotal - session.students | length}}</span></p>
+      </div>
+  
+      <button class="addButton">
+        <i class="fa-solid fa-circle-plus"></i> Ajouter un étudient
+      </button>
+
+      <hr>
+      
+      {% if session.students is empty %}
+  
+      <p>Aucun étudiant</p>
+  
+      {% else %}
+  
+      <table>
+        <thead>
+          <tr>
+            <th>Etudiant inscrit</th>
+            <th>Email</th>
+            <th>Tel</th>
+            <th></th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% for student in session.students %}
+  
+          <tr>
+            <th>
+              <a href="{{ path('show_student', {'id': student.id}) }}">
+                {{student.lastName}} {{student.firstName}}
+              </a>
+            </th>
+            <td>
+              {{student.email}}
+            </td>
+            <td>
+              {{student.phoneNumber}}
+            </td>
+            <td>
+              {# <a href="{{ path('remove_session_student', {'idStudent': student.id, 'idSession':session.id}) }}"> #}
+                <i class="fa-solid fa-circle-xmark del-btn"></i>
+              </a>
+            </td>
+          </tr>
+  
+          {% endfor %}
+  
+        </tbody>
+      </table>
+  
+      {# <button class="addButton">
+        <i class="fa-solid fa-circle-plus"></i> Ajouter un étudiant
+      </button> #}
+  
+      {% endif %}
+  
+    </section>
+  </div>
+  
+  <dialog id="sessionDialog" class="dialogModify">
+  
+    {# {{ form_start(formAddSession) }}
+    {{ form_row(formAddSession.id) }}
+    {{ form_row(formAddSession.formation) }}
+    {{ form_row(formAddSession.start_date) }}
+    {{ form_row(formAddSession.end_date) }}
+    {{ form_row(formAddSession.nb_place_total) }}
+    {{ form_end(formAddSession) }} #}
+  
+    <div class="modalNav">
+      <button type="button" class="cancel">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+  
+      <button type="submit">
+        <i class="fa-solid fa-circle-check"></i>
+      </button>
+    </div>
+  
+  </dialog>
+  
+  {# <dialog id="studentDialog" class="dialogAdd">
+  
+    {% for student in OthersStudents %}
+    <a href="{{path('add_session_student', {'idSession': session.id, 'idStudent': student.id})}}">
+      <p class="studentForm">{{student}}</p>
+    </a>
+    {% endfor %}
+  
+    <div class="modalNav">
+      <button type="button" class="cancel">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+    </div>
+  </dialog> #}
+  
+  {% endblock %}
+  
+  {% block javascripts %}
+  <script src="{{asset('js/modal.js')}}"></script>
+  <script src="{{asset('js/menuBurger.js')}}"></script>
+  <script src="{{asset('js/sessionModule.js')}}"></script>
+  {% endblock %}
 

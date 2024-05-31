@@ -8,10 +8,12 @@
 
     {% for user in users %}
 
-    {{ user.id ~ ' (' ~ user.lastName ~ ' ' ~ user.firstName ~ ' ' ~ user.avatar ~ ' )'}} <br> 
+    {{ user.id ~ ' . ' ~ user.lastName ~ ' ' ~ user.firstName ~ '  '}} <br> 
     
     {# pour détailler la liste on ajoute le lien #}
     {# <a href="{{ path('show_user', {'id': user.id}) }}">{{ user }}</a><br> #}
 
     {% endfor %}
 {% endblock %}
+
+{# <a href="index.php?ctrl=home"><img src="public/img/logo/forum.png" alt=""></a> #}
